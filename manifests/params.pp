@@ -34,6 +34,25 @@ class mailcatcher::params {
             }
           }
         }
+        'Debian': {
+          case $::lsbdistcodename {
+            'jessie': {
+              $config_file = '/etc/systemd/system/mailcatcher.service'
+              $template    = 'mailcatcher/etc/systemd/system/mailcatcher.service.erb'
+              $provider    = 'systemd'
+            }
+            'stretch': {
+              $config_file = '/etc/systemd/system/mailcatcher.service'
+              $template    = 'mailcatcher/etc/systemd/system/mailcatcher.service.erb'
+              $provider    = 'systemd'
+            }
+            default: {
+              $config_file = '/etc/init/mailcatcher.conf'
+              $template    = 'mailcatcher/etc/init/mailcatcher.conf.erb'
+              $provider    = 'upstart'
+            }
+          }
+        }
         default: {
           $config_file = '/etc/init.d/mailcatcher'
           $template    = 'mailcatcher/etc/init/mailcatcher.lsb.erb'

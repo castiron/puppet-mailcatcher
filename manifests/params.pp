@@ -16,23 +16,9 @@ class mailcatcher::params {
 
       case $::operatingsystem {
         'Ubuntu': {
-          case $::lsbdistcodename {
-            'vivid': {
-              $config_file = '/etc/systemd/system/mailcatcher.service'
-              $template    = 'mailcatcher/etc/systemd/system/mailcatcher.service.erb'
-              $provider    = 'systemd'
-            }
-            'xenial': {
-              $config_file = '/etc/systemd/system/mailcatcher.service'
-              $template    = 'mailcatcher/etc/systemd/system/mailcatcher.service.erb'
-              $provider    = 'systemd'
-            }
-            default: {
-              $config_file = '/etc/init/mailcatcher.conf'
-              $template    = 'mailcatcher/etc/init/mailcatcher.conf.erb'
-              $provider    = 'upstart'
-            }
-          }
+          $config_file = '/etc/systemd/system/mailcatcher.service'
+          $template    = 'mailcatcher/etc/systemd/system/mailcatcher.service.erb'
+          $provider    = 'systemd'
         }
         'Debian': {
           case $::lsbdistcodename {
